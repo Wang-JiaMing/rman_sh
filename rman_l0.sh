@@ -17,9 +17,12 @@ rman target / <<EOF
 run{
 	allocate channel ch1 device type disk;
 	allocate channel ch2 device type disk;
-	backup as compressed backupset incremental level 0 tablespace gdyc_drug_usage format '/home/oracle/backup/data/level_0_%u';
+	backup as compressed backupset incremental level 0 tablespace gdyc_drug_usage format '/db_backup/backup/data/level_0_%u';
+
+
+	
 	SQL'ALTER SYSTEM SWITCH LOGFILE';
-	backup as compressed backupset incremental level 0 archivelog all format'/home/oracle/backup/data/arch_level_0_%u' delete all input;
+	backup as compressed backupset incremental level 0 archivelog all format'/db_backup/backup/data/arch_level_0_%u' delete all input;
 	release channel ch1;
 	release channel ch2;
 }
